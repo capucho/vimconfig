@@ -89,7 +89,7 @@ let g:ctrlp_working_path_mode = 'a'
 "============================================
 " GIT Gutter Config
 "============================================
-let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 "============================================
 
 
