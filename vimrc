@@ -1,11 +1,11 @@
-syntax enable
-filetype plugin indent on
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+filetype plugin indent on
+syntax enable
 
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
@@ -13,7 +13,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
 Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
@@ -31,18 +30,16 @@ Plug 'chrisbra/Colorizer'
 Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
+Plug 'cohama/lexima.vim'
 Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 " ===========================================
 " NERDTREE configuration
 " ===========================================
+
 nmap <C-k> :NERDTreeFind<cr>
-" nmap <C-k> :NERDTreeTabsFind<cr>
-" nmap <C-l> :NERDTreeToggle<CR>
 nmap <C-l> :NERDTreeToggle<cr>
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " ===========================================
 " VIM configuration
@@ -82,7 +79,7 @@ xnoremap p "_dP
 " ===========================================
 " CTRLP configuration
 " ===========================================
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*,*/android/*,*/ios/*
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_by_filename = 0
@@ -166,10 +163,4 @@ let g:user_emmet_settings = {
       \  }
       \}
 
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-
-
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
-
