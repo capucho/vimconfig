@@ -7,7 +7,8 @@ endif
 filetype plugin indent on
 syntax enable
 
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+let mapleader="\<space>"
+
 call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
@@ -19,7 +20,6 @@ Plug 'rking/ag.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/tpope-vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -31,33 +31,25 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'cohama/lexima.vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
-" ===========================================
-" NERDTREE configuration
-" ===========================================
 
-nmap <C-k> :NERDTreeFind<cr>
-nmap <C-l> :NERDTreeToggle<cr>
-
-" ===========================================
-" VIM configuration
-" ===========================================
 colorscheme Tomorrow-Night
 
 set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
-set history=1000                "Store lots of :cmdline history
-set backspace=indent,start			"Allow backspace in insert mode
+set history=1000
+set backspace=indent,start
 set backspace=2
-set number                      "Line numbers are good
-set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
-set visualbell                  "No sounds
-set autoread                    "Reload files changed outside vim
+set number
+set showcmd
+set showmode
+set visualbell
+set autoread
 set noswapfile
 set nobackup
 set nowb
@@ -76,85 +68,43 @@ set softtabstop=2
 set tabstop=2
 xnoremap p "_dP
 
-" ===========================================
-" CTRLP configuration
-" ===========================================
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*,*/android/*,*/ios/*
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_working_path_mode = 'a'
 
+nmap <C-k> :NERDTreeFind<cr>
+nmap <C-l> :NERDTreeToggle<cr>
+let NERDTreeShowHidden=1
+nnoremap <C-f> :Ag<space>
 
-"============================================
-" GIT Gutter Config
-"============================================
 set signcolumn=yes
-"============================================
 
-
-" ===========================================
-" AG configuration
-" ===========================================
 let g:ag_working_path_mode="r"
 
-" ===========================================
-" AIRLINE configuration
-" ===========================================
 set laststatus=2
-"
-" ===========================================
-" SEARCH highlight
-" ===========================================
 
-" highlight search terms
 set hlsearch
 
-" show search matches as you type
 set incsearch
 
-" Press Space to turn off highlighting and clear any message already displayed
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 autocmd BufWritePre * :%s/\s\+$//e    "remove espaço no final da linha
 
-
-" ===========================================
-" TABULAR configuration
-" ===========================================
 map <C-t>  :Tab /=<CR>
 
-" CUSTOM shortcuts
-nmap ,cs :let @*=expand("%")<CR>
-nmap ,cl :let @*=expand("%:p")<CR>"
-"
-"Copy file path, name
-if has('win32')
-  nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
-
-  " This will copy the path in 8.3 short format, for DOS and Windows 9x
-  nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
-else
-  nmap ,cs :let @*=expand("%")<CR>
-  nmap ,cl :let @*=expand("%:p")<CR>
-endif
-" ##############
-" Tab Management
-" ##############
-
-" vim tab navigation
 for i in [1, 2, 3, 4, 5, 6, 7]
   execute 'nnoremap ,'.i.' '.i.'gt'
 endfor
 
-" tab managements
+
 nmap ,tc :tabclose<CR>
 nmap ,tn :tabnew<CR>
 nmap ,to :tabo<CR>
 nmap ,t :tabedit<CR>
 
-" emmet config
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
