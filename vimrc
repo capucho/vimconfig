@@ -33,6 +33,7 @@ Plug 'w0rp/ale'
 Plug 'cohama/lexima.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'skywind3000/asyncrun.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 
@@ -104,7 +105,7 @@ nmap ,tc :tabclose<CR>
 nmap ,tn :tabnew<CR>
 nmap ,to :tabo<CR>
 nmap ,t :tabedit<CR>
-
+imap <C-e> <esc>A
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
