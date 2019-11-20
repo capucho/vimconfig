@@ -9,23 +9,22 @@ syntax enable
 
 let mapleader="\<space>"
 
+
+
 call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-bundler'
-Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/tpope-vim-abolish'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-Plug 'digitaltoad/vim-pug'
-Plug 'posva/vim-vue'
-Plug 'lepture/vim-velocity'
 Plug 'chrisbra/Colorizer'
 Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
@@ -33,7 +32,8 @@ Plug 'w0rp/ale'
 Plug 'cohama/lexima.vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'skywind3000/asyncrun.vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'leafgarland/typescript-vim' " TS Syntax
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 
@@ -67,7 +67,10 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+set number relativenumber
+set nu rnu
 xnoremap p "_dP
+
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*,*/android/*,*/ios/*
 let g:ctrlp_working_path_mode = 'ra'
@@ -115,3 +118,30 @@ let g:user_emmet_settings = {
       \}
 
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+
+" Prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+
+"TS
+
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tsserver', 'tslint']
+\}
+
+
+let g:ale_fixers = {
+\    'javascript': ['prettier'],
+\    'typescript': ['prettier'],
+\}
+let g:ale_fix_on_save = 1
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
