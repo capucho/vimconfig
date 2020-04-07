@@ -83,13 +83,8 @@ let NERDTreeShowHidden=1
 nnoremap <C-f> :Ack<space>
 
 set signcolumn=yes
-
-let g:ag_working_path_mode="r"
-
 set laststatus=2
-
 set hlsearch
-
 set incsearch
 
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
