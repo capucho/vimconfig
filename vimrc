@@ -1,3 +1,4 @@
+" load Plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -9,17 +10,15 @@ syntax enable
 
 let mapleader="\<space>"
 
-
-
 call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-bundler'
 Plug 'kien/ctrlp.vim'
-Plug 'rking/ag.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'ervandew/supertab'
+Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/tpope-vim-abolish'
@@ -30,14 +29,15 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'cohama/lexima.vim'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'skywind3000/asyncrun.vim'
-Plug 'leafgarland/typescript-vim' " TS Syntax
+Plug 'leafgarland/typescript-vim'
 Plug 'vimwiki/vimwiki'
+Plug 'Quramy/tsuquyomi'
+Plug 'prettier/vim-prettier', {'do': 'yarn install'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
 
-
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 
 set nocompatible
 set encoding=utf-8
@@ -71,7 +71,6 @@ set number relativenumber
 set nu rnu
 xnoremap p "_dP
 
-
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*,*/android/*,*/ios/*
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
@@ -81,7 +80,7 @@ let g:ctrlp_working_path_mode = 'a'
 nmap <C-k> :NERDTreeFind<cr>
 nmap <C-l> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
-nnoremap <C-f> :Ag<space>
+nnoremap <C-f> :Ack<space>
 
 set signcolumn=yes
 
@@ -103,7 +102,6 @@ for i in [1, 2, 3, 4, 5, 6, 7]
   execute 'nnoremap ,'.i.' '.i.'gt'
 endfor
 
-
 nmap ,tc :tabclose<CR>
 nmap ,tn :tabnew<CR>
 nmap ,to :tabo<CR>
@@ -120,15 +118,11 @@ let g:user_emmet_settings = {
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
 " Prettier
-let g:prettier#autoformat = 0
+let g:prettier#autoformat=1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
-
 "TS
-
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-
-
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
@@ -143,5 +137,10 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [
+      \ {'path': '~/vimwiki/',
+      \ 'syntax': 'markdown', 'ext': '.md'},
+      \ {'path': '/Volumes/GoogleDrive/My Drive/wiki',
+      \ 'syntax': 'markdown', 'ext': '.md'}
+      \]
+
