@@ -53,13 +53,12 @@ set autoread
 set noswapfile
 set nobackup
 set nowb
-set mouse=a
+set mouse=v
 set autoindent
 set nowrap
 set t_Co=256
 set showmatch
 set foldmethod=manual
-set clipboard+=unnamed
 set clipboard+=unnamedplus
 set noendofline binary
 set expandtab
@@ -91,6 +90,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 autocmd BufWritePre * :%s/\s\+$//e    "remove espaço no final da linha
 
 map <C-t>  :Tab /=<CR>
+map <C-c> "+y
 
 for i in [1, 2, 3, 4, 5, 6, 7]
   execute 'nnoremap ,'.i.' '.i.'gt'
@@ -100,23 +100,29 @@ nmap ,tc :tabclose<CR>
 nmap ,tn :tabnew<CR>
 nmap ,to :tabo<CR>
 nmap ,t :tabedit<CR>
+
+" Insert mode mapping
 imap <C-e> <esc>A
+imap <C-h> <Left>
+imap <C-l> <Right>
+imap <C-j> <Down>
+imap <C-k> <Up>
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
-      \  'javascript.jsx' : {
-      \   'extends' : 'jsx',
-      \  }
-      \}
+    \  'javascript.jsx' : {
+    \   'extends' : 'jsx',
+    \  }
+    \}
 
-autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+" autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
 " Prettier
 let g:prettier#autoformat=1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 "TS
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+" autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
@@ -132,11 +138,11 @@ let g:ale_fix_on_save = 1
 
 
 let g:vimwiki_list = [
-      \ {'path': '~/vimwiki/',
-      \ 'syntax': 'markdown', 'ext': '.md'},
-      \ {'path': '/Volumes/GoogleDrive/My Drive/wiki',
-      \ 'syntax': 'markdown', 'ext': '.md'}
-      \]
+    \ {'path': '~/vimwiki/',
+    \ 'syntax': 'markdown', 'ext': '.md'},
+    \ {'path': '/Volumes/GoogleDrive/My Drive/wiki',
+    \ 'syntax': 'markdown', 'ext': '.md'}
+    \]
 
 
 " TextEdit might fail if hidden is not set.
@@ -159,24 +165,24 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
+" Recently vim can merge signcolumn and number column into one
+set signcolumn=number
 else
-  set signcolumn=yes
+set signcolumn=yes
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -186,9 +192,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -205,11 +211,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+if (index(['vim','help'], &filetype) >= 0)
+  execute 'h '.expand('<cword>')
+else
+  call CocAction('doHover')
+endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -223,11 +229,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+autocmd!
+" Setup formatexpr specified filetype(s).
+autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+" Update signature help on jump placeholder.
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
