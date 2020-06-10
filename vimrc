@@ -34,9 +34,13 @@ Plug 'vimwiki/vimwiki'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-colorscheme Tomorrow-Night-Bright
+let g:dracula_italic = 0
+
+colorscheme dracula
+" colorscheme Tomorrow-Night-Bright
 
 set nocompatible
 set encoding=utf-8
@@ -78,6 +82,7 @@ let g:ctrlp_working_path_mode = 'a'
 nmap <C-k> :NERDTreeFind<cr>
 nmap <C-l> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
+let NERDTreeWinPos="right"
 nnoremap <C-f> :Ack<space>
 
 set signcolumn=yes
