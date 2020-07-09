@@ -34,13 +34,12 @@ Plug 'vimwiki/vimwiki'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'phanviet/vim-monokai-pro'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
-let g:dracula_italic = 0
-
-colorscheme dracula
-" colorscheme Tomorrow-Night-Bright
+set termguicolors
+colorscheme monokai_pro
 
 set nocompatible
 set encoding=utf-8
@@ -63,6 +62,7 @@ set nowrap
 set t_Co=256
 set showmatch
 set foldmethod=manual
+set clipboard+=unnamed
 set clipboard+=unnamedplus
 set noendofline binary
 set expandtab
@@ -73,11 +73,12 @@ set number relativenumber
 set nu rnu
 xnoremap p "_dP
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*,*/android/*,*/ios/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.obj,system*,*.jpg,*.png,*.gif,*.log,*/node_modules/*,*/android/*,*/ios/*,*/dist/*
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_working_path_mode = 'a'
+
 
 nmap <C-k> :NERDTreeFind<cr>
 nmap <C-l> :NERDTreeToggle<cr>
@@ -115,39 +116,39 @@ imap <C-k> <Up>
 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
-    \  'javascript.jsx' : {
-    \   'extends' : 'jsx',
-    \  }
-    \}
+      \  'javascript.jsx' : {
+      \   'extends' : 'jsx',
+      \  }
+      \}
 
 " autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
 " Prettier
-let g:prettier#autoformat=1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+" let g:prettier#autoformat=1
+" let g:prettier#autoformat_config_present = 1
+
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 "TS
-" autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+"autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tsserver', 'tslint']
+\   'typescript': ['tsserver', 'eslint']
 \}
 
 
 let g:ale_fixers = {
-\    'javascript': ['prettier'],
-\    'typescript': ['prettier'],
+\    'javascript': ['eslint'],
+\    'typescript': ['eslint', 'prettier'],
 \}
+
 let g:ale_fix_on_save = 1
 
-
 let g:vimwiki_list = [
-    \ {'path': '~/vimwiki/',
-    \ 'syntax': 'markdown', 'ext': '.md'},
-    \ {'path': '/Volumes/GoogleDrive/My Drive/wiki',
-    \ 'syntax': 'markdown', 'ext': '.md'}
-    \]
+      \ {'path': '~/vimwiki/',
+      \ 'syntax': 'markdown', 'ext': '.md'}
+      \]
 
 
 " TextEdit might fail if hidden is not set.
@@ -170,24 +171,24 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
-" Recently vim can merge signcolumn and number column into one
-set signcolumn=number
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
 else
-set signcolumn=yes
+  set signcolumn=yes
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -197,9 +198,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -216,11 +217,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-if (index(['vim','help'], &filetype) >= 0)
-  execute 'h '.expand('<cword>')
-else
-  call CocAction('doHover')
-endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
@@ -234,11 +235,11 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
-autocmd!
-" Setup formatexpr specified filetype(s).
-autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-" Update signature help on jump placeholder.
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
