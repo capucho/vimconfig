@@ -36,6 +36,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'phanviet/vim-monokai-pro'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 set termguicolors

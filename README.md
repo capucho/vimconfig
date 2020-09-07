@@ -7,6 +7,12 @@ This vim configuration is focused on Javascript and Typescript
 - Ack (brew install ack)
 - Node and Yarn (for MarkdownPreview)
 
+## Plugins
+
+This config uses Plug as extensions manager
+
+Run :PlugInstall to install the plugins
+
 ## Configs
 
 Space as leader
