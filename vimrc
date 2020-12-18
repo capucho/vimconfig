@@ -34,13 +34,15 @@ Plug 'vimwiki/vimwiki'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'phanviet/vim-monokai-pro'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set termguicolors
-colorscheme monokai_pro
+colorscheme gruvbox
+set bg=dark
 
 set nocompatible
 set encoding=utf-8
@@ -63,8 +65,8 @@ set nowrap
 set t_Co=256
 set showmatch
 set foldmethod=manual
-set clipboard+=unnamed
-set clipboard+=unnamedplus
+set clipboard=unnamed
+set clipboard=unnamedplus
 set noendofline binary
 set expandtab
 set shiftwidth=2
@@ -80,6 +82,10 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_working_path_mode = 'a'
 
+let g:gruvbox_contrast_dark='soft'
+let g:gruvbox_contrast_light='soft'
+
+let g:airline#extensions#tabline#enabled = 1
 
 nmap <C-k> :NERDTreeFind<cr>
 nmap <C-l> :NERDTreeToggle<cr>
@@ -285,18 +291,18 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <leader>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
