@@ -6,6 +6,7 @@ This vim configuration is focused on Javascript and Typescript
 
 - Ack (brew install ack)
 - Node and Yarn (for MarkdownPreview)
+- To be able to use the icons in NERDTree, you will need a font from [here](https://github.com/ryanoasis/nerd-fonts#font-installation)
 
 ## Plugins
 
