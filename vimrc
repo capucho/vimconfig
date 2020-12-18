@@ -82,11 +82,14 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_working_path_mode = 'a'
 
+" Gruvbox color theme
 let g:gruvbox_contrast_dark='soft'
 let g:gruvbox_contrast_light='soft'
 
+" Airline show buffers on top
 let g:airline#extensions#tabline#enabled = 1
 
+" NERDTree Config
 nmap <C-k> :NERDTreeFind<cr>
 nmap <C-l> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
