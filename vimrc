@@ -39,12 +39,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'LnL7/vim-nix'
 call plug#end()
 
 set termguicolors
-"
-" let g:airline_theme='gruvbox'
+set bg=dark
 let g:gruvbox_contrast_dark='hard'
 
 colorscheme gruvbox
