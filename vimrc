@@ -30,24 +30,30 @@ Plug 'w0rp/ale'
 Plug 'cohama/lexima.vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'LnL7/vim-nix'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'vimwiki/vimwiki'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'editorconfig/editorconfig-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'morhetz/gruvbox'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'LnL7/vim-nix'
 call plug#end()
 
 set termguicolors
+"
+" let g:airline_theme='gruvbox'
+let g:gruvbox_contrast_dark='hard'
+
 colorscheme gruvbox
-set bg=dark
 
 set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
+set textwidth=80
 set history=1000
 set backspace=indent,start
 set backspace=2
@@ -65,8 +71,8 @@ set nowrap
 set t_Co=256
 set showmatch
 set foldmethod=manual
-set clipboard=unnamed
-set clipboard=unnamedplus
+set clipboard+=unnamed
+set clipboard+=unnamedplus
 set noendofline binary
 set expandtab
 set shiftwidth=2
@@ -82,14 +88,7 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_by_filename = 0
 let g:ctrlp_working_path_mode = 'a'
 
-" Gruvbox color theme
-let g:gruvbox_contrast_dark='soft'
-let g:gruvbox_contrast_light='soft'
 
-" Airline show buffers on top
-let g:airline#extensions#tabline#enabled = 1
-
-" NERDTree Config
 nmap <C-k> :NERDTreeFind<cr>
 nmap <C-l> :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
@@ -156,6 +155,8 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 let g:vimwiki_list = [
+      \ {'path': '/Volumes/GoogleDrive/My\ Drive/WorkNotes/',
+      \ 'syntax': 'markdown', 'ext': '.md'},
       \ {'path': '~/vimwiki/',
       \ 'syntax': 'markdown', 'ext': '.md'}
       \]
