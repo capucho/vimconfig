@@ -38,6 +38,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
