@@ -21,7 +21,7 @@ Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/tpope-vim-abolish'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 Plug 'tpope/vim-surround'
 Plug 'chrisbra/Colorizer'
 Plug 'airblade/vim-gitgutter'
@@ -104,7 +104,6 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 autocmd BufWritePre * :%s/\s\+$//e    "remove espaço no final da linha
 
 map <C-t>  :Tab /=<CR>
-map <C-c> "+y
 
 for i in [1, 2, 3, 4, 5, 6, 7]
   execute 'nnoremap ,'.i.' '.i.'gt'
@@ -309,3 +308,7 @@ nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+
+" Copy macOS and Linux
+noremap <C-c> "+y
+noremap <Leader>y "+y
