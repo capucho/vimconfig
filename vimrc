@@ -39,6 +39,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
+Plug 'PhilRuninger/nerdtree-visual-selection'
+Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -47,6 +49,8 @@ set bg=dark
 let g:gruvbox_contrast_dark='hard'
 
 colorscheme gruvbox
+
+let g:indentLine_color_term=239
 
 set nocompatible
 set encoding=utf-8
