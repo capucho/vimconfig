@@ -39,7 +39,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
-Plug 'PhilRuninger/nerdtree-visual-selection'
+Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'sheerun/vim-polyglot'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
